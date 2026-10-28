@@ -171,8 +171,41 @@ function About() {
 }
 
 function Contact() {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+  const reduced = useReducedMotion()
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText('Huangxcxc@gmail.com')
+      setCopyStatus('copied')
+    } catch {
+      setCopyStatus('error')
+    }
+  }
+
   return (
-    <section className="contact-section view-contact" aria-labelledby="contact-title"><div className="wrap contact-inner"><div><p className="eyebrow">HAVE SOMETHING IN MIND?</p><h1 id="contact-title">Let’s make<br /><span>something good.</span></h1><p className="contact-intro">Have a project, a question, or just want to say hello? I’d love to hear from you.</p><a className="contact-email" href="mailto:Huangxcxc@gmail.com">Huangxcxc@gmail.com <span aria-hidden="true">↗</span></a><div className="contact-links"><a href="https://github.com/XingchengH" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/xingcheng-huang67/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={resumeUrl} target="_blank" rel="noreferrer">Résumé ↗</a></div></div><motion.div className="contact-side" aria-hidden="true" whileHover={{ rotate: 12, scale: 1.05 }}><Star /><p>GOOD WORK.<br />GOOD MUSIC.<br />GOOD COMPANY.</p></motion.div></div></section>
+    <section className="contact-view wrap" aria-labelledby="contact-title">
+      <div className="contact-heading-row mono"><span>THE NEXT TRACK / GET IN TOUCH</span><span>SUNNYVALE, CALIFORNIA</span></div>
+      <div className="contact-layout">
+        <div className="contact-copy">
+          <p className="eyebrow">HAVE SOMETHING IN MIND?</p>
+          <h1 id="contact-title" aria-label="Let’s make something good.">Let’s make<br /><span>something</span><br />good<Star /><span className="contact-period">.</span></h1>
+          <p className="contact-description">A project, an opportunity, or just a good conversation — I’d love to hear from you.</p>
+          <div className="contact-actions">
+            <a className="contact-primary" href="mailto:Huangxcxc@gmail.com">Send me an email <span aria-hidden="true">↗</span></a>
+            <button className="contact-copy-button" type="button" onClick={copyEmail}>{copyStatus === 'copied' ? 'Email copied ✓' : 'Copy email'}</button>
+          </div>
+          <p className="contact-address">Huangxcxc@gmail.com</p>
+          <p className="contact-feedback" aria-live="polite">{copyStatus === 'copied' ? 'Email address copied.' : copyStatus === 'error' ? 'Could not copy automatically. You can select the address above.' : ''}</p>
+        </div>
+        <motion.div className="contact-postcard" aria-hidden="true" initial={reduced ? { opacity: 0 } : { opacity: 0, rotate: -5, y: 20 }} animate={{ opacity: 1, rotate: 0, y: 0 }} transition={{ duration: .6, delay: .12, ease: [0.22, 1, 0.36, 1] }} whileHover={reduced ? undefined : { rotate: -2, y: -5 }}>
+          <div className="postcard-top mono"><span>A NOTE FROM VINCENT</span><span>NO. 01 / HELLO</span></div>
+          <div className="postcard-title">GOOD<br />IDEAS<br /><span>WELCOME</span><span className="postcard-dot">.</span></div>
+          <div className="postcard-bottom"><div className="postcard-stamp"><Star /><span>LET’S<br />CONNECT</span></div><p className="mono">GOOD WORK.<br />GOOD MUSIC.<br />GOOD COMPANY.</p></div>
+        </motion.div>
+      </div>
+      <div className="contact-elsewhere"><div><span className="eyebrow">FIND ME ELSEWHERE</span><p>More places to connect and explore.</p></div><div className="contact-socials"><a href="https://github.com/XingchengH" target="_blank" rel="noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/xingcheng-huang67/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a><a href={resumeUrl} target="_blank" rel="noreferrer"><span>Résumé</span><span aria-hidden="true">↗</span></a></div></div>
+    </section>
   )
 }
 
