@@ -9,8 +9,8 @@ const pageNames: Record<string, string> = {
 }
 const navItems = [
   { label: 'Home', to: '/' },
-  { label: 'Work', to: '/work' },
   { label: 'Experience', to: '/experience' },
+  { label: 'Work', to: '/work' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -25,7 +25,7 @@ function Header() {
       <Link className="wordmark" to="/" aria-label="Xingcheng Huang, home">
         <span aria-hidden="true">{'VINCENT'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${index * 0.2}s` }} key={index}>{letter}</span>)}</span><Star /><span aria-hidden="true">HUANG</span>
       </Link>
-      <span className="header-note">ENGINEER / MUSIC LOVER / READER</span>
+      <span className="header-note">FRONTEND ENGINEER · POP ON REPEAT</span>
       <nav aria-label="Main navigation">
         {navItems.map(({ label, to }) => (
           <NavLink key={to} to={to} end={to === '/'}>
@@ -47,11 +47,11 @@ function Cover() {
       whileHover={reduced ? undefined : { rotate: -2, y: -5 }}>
       <div className="cover-shadow" />
       <div className="cover">
-        <div className="cover-top mono"><span>THE VINCENT MIX</span><span>VOL. 01 / PERSONAL PORTFOLIO</span></div>
+        <div className="cover-top mono"><span>THE VINCENT MIX</span><span>ENGINEERING / POP STUDIO</span></div>
         <div className="cover-title">CODE<br />MEETS<br />POP<span>.</span></div>
-        <div className="cover-bottom"><span className="mono">A LITTLE LOGIC<br />A LOT OF CURIOSITY</span><div className="cover-record" aria-hidden="true"><Star /></div></div>
+        <div className="cover-bottom"><span className="mono">CLEAR INTERFACES<br />CURIOUS BY NATURE</span><div className="cover-record" aria-hidden="true"><Star /></div></div>
       </div>
-      <span className="cover-caption mono">SIDE A: THE WORK &nbsp; / &nbsp; SIDE B: THE PERSON</span>
+      <span className="cover-caption mono">SIDE A: ENGINEERING &nbsp; / &nbsp; SIDE B: THE PERSON</span>
     </motion.div>
   )
 }
@@ -67,34 +67,34 @@ function Home() {
     <div className="home-view">
       <section className="hero wrap" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <motion.div className="eyebrow" {...reveal(.04)}><span className="eyebrow-dot" /> XINGCHENG HUANG · SUNNYVALE, CA</motion.div>
-          <motion.h1 id="hero-title" {...reveal(.1)}>Creative mind.<br /><span>Builder</span> by<br />nature<span className="period">.</span></motion.h1>
-          <motion.p {...reveal(.19)}>Hi, I’m Vincent — a frontend-focused full-stack engineer making complex things feel simple. Pop music is somewhere in the mix, too.</motion.p>
+          <motion.div className="eyebrow" {...reveal(.04)}><span className="eyebrow-dot" /> FRONTEND ENGINEER · SUNNYVALE, CA</motion.div>
+          <motion.h1 id="hero-title" {...reveal(.1)}>Complex systems.<br /><span>Clear interfaces</span><span className="period">.</span></motion.h1>
+          <motion.p {...reveal(.19)}>I’m Xingcheng (Vincent), a React and TypeScript engineer who builds dependable enterprise workflows and thoughtful web experiences.</motion.p>
           <motion.div className="hero-actions" {...reveal(.27)}>
-            <Link className="button button-primary" to="/work">Explore my work <span aria-hidden="true">↗</span></Link>
-            <Link className="button button-outline" to="/about">A little about me <Star /></Link>
+            <Link className="button button-primary" to="/experience">See my experience <span aria-hidden="true">↗</span></Link>
+            <a className="button button-outline" href={resumeUrl} target="_blank" rel="noreferrer">Open résumé <Star /></a>
           </motion.div>
-          <motion.div className="hero-footnote mono" {...reveal(.36)}><span>FRONTEND-FOCUSED</span><span>FULL-STACK CAPABLE</span></motion.div>
+          <motion.div className="hero-proof" {...reveal(.36)}><span>React + TypeScript</span><span>Enterprise workflows</span><span>Frontend-focused</span></motion.div>
         </div>
         <Cover />
       </section>
       <div className="wrap"><div className="marquee" aria-label="Engineering, good interfaces, pop music, new ideas">
-        {['ENGINEERING', 'GOOD INTERFACES', 'POP MUSIC', 'NEW IDEAS'].map(word => <span className="marquee-item" key={word}>{word}<Star /></span>)}
+        {['React + TypeScript', 'Enterprise workflows', 'Reliable interfaces', 'Pop on repeat'].map(word => <span className="marquee-item" key={word}>{word}<Star /></span>)}
       </div></div>
     </div>
   )
 }
 
-function PageHeading({ eyebrow, title, detail }: { eyebrow: string; title: string; detail: string }) {
-  return <div className="page-heading"><div><p className="eyebrow">{eyebrow}</p><h1>{title}<Star /></h1></div><p className="page-heading-detail">{detail}</p></div>
+function PageHeading({ id, eyebrow, title, detail }: { id: string; eyebrow: string; title: string; detail: string }) {
+  return <div className="page-heading"><div><p className="eyebrow">{eyebrow}</p><h1 id={id}>{title}<Star /></h1></div><p className="page-heading-detail">{detail}</p></div>
 }
 
-function ProjectArtwork({ type, label }: { type: string; label: string }) {
+function ProjectArtwork({ type, label, image }: { type: string; label: string; image?: string }) {
+  if (image) return <figure className="project-product-shot"><img src={`${import.meta.env.BASE_URL}${image}`} alt={label} /><figcaption>Real product demo · Inline Scheduler</figcaption></figure>
   return (
     <div className={`project-art project-art--${type}`} role="img" aria-label={label}>
-      {type === 'chat' && <><span className="art-chat art-chat-one">HELLO</span><span className="art-chat art-chat-two">RIGHT<br />HERE ↗</span><span className="art-caption mono">A CONVERSATION IN MOTION</span></>}
-      {type === 'music' && <><span className="art-music-disc"><span>ON<br />REPEAT</span></span><span className="art-caption mono">FOR THE LOVE OF MUSIC</span></>}
-      {type === 'schedule' && <><span className="art-schedule-top mono">GOOD THINGS AHEAD</span><div className="art-schedule-grid"><span>LET’S</span><span>MAKE</span><span>TIME</span><span><Star /></span></div><span className="art-caption mono">PLANS ARE BETTER TOGETHER</span></>}
+      {type === 'chat' && <><span className="art-chat art-chat-one">HELLO</span><span className="art-chat art-chat-two">RIGHT<br />HERE ↗</span><span className="art-caption">Concept artwork · Real-Time Chat</span></>}
+      {type === 'music' && <><span className="art-music-disc"><span>ON<br />REPEAT</span></span><span className="art-caption">Concept artwork · Music Streaming</span></>}
     </div>
   )
 }
@@ -105,29 +105,29 @@ function Work() {
   const reduced = useReducedMotion()
   return (
     <section className="wrap view-section work-view" aria-labelledby="work-heading">
-      <PageHeading eyebrow="A FEW THINGS I'VE BUILT" title="Things I’ve made" detail="A few projects that bring ideas, interfaces, and the details together." />
-      <h2 id="work-heading" className="sr-only">Selected projects</h2>
+      <PageHeading id="work-heading" eyebrow="Selected work" title="Things I’ve built" detail="Three projects showing how I approach real-time systems, product flows, and collaborative builds." />
       <div className="work-layout">
         <div className="project-picker" aria-label="Choose a project">
-          <div className="picker-label mono"><span>THE PROJECT INDEX</span><span>01—03</span></div>
+          <p className="picker-label">Choose a project</p>
           {projects.map((item, index) => (
-            <motion.button type="button" key={item.number} className="project-choice" aria-pressed={selected === index}
+            <motion.button type="button" key={item.title} className="project-choice" aria-pressed={selected === index}
               onClick={() => setSelected(index)} whileHover={reduced ? undefined : { x: 4 }} whileTap={reduced ? undefined : { scale: .98 }}>
-              <span className="project-choice-number mono">{item.number}</span><span className="project-choice-name">{item.title}<small>{item.category}</small></span><span className="choice-arrow" aria-hidden="true">↗</span>
+              <span className="project-choice-name">{item.title}<small>{item.category}</small></span><span className="choice-arrow" aria-hidden="true">↗</span>
             </motion.button>
           ))}
-          <p className="picker-note">Select a project to take a closer look. <Star /></p>
+          <p className="picker-note">Each selection opens the project story, tools, and source. <Star /></p>
         </div>
         <div className="project-stage" aria-live="polite">
           <AnimatePresence mode="wait" initial={false}>
-            <motion.article key={project.number} className="project-detail-view"
+            <motion.article key={project.title} className="project-detail-view"
               initial={reduced ? { opacity: 0 } : { opacity: 0, y: 14, scale: .99 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }}
               transition={{ duration: .25, ease: 'easeOut' }}>
-              <ProjectArtwork type={project.artwork} label={project.artLabel} />
-              <div className="project-meta mono"><span>{project.category}</span><span>/{project.number}</span></div>
-              <h2>{project.title}</h2><p className="project-subtitle">{project.description}</p><p className="project-description">{project.detail}</p>
+              <ProjectArtwork type={project.artwork} label={project.artLabel} image={'image' in project ? project.image : undefined} />
+              <p className="project-meta">{project.category}</p>
+              <h2>{project.title}</h2><p className="project-subtitle">{project.description}</p>
+              <div className="project-story"><div><h3>Challenge</h3><p>{project.challenge}</p></div><div><h3>Contribution</h3><p>{project.contribution}</p></div></div>
               <ul className="tag-list" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
               <div className="project-links"><a href={project.href} target="_blank" rel="noreferrer">View source <span aria-hidden="true">↗</span></a>{'liveHref' in project && <a href={project.liveHref} target="_blank" rel="noreferrer">Visit project <span aria-hidden="true">↗</span></a>}</div>
             </motion.article>
@@ -143,13 +143,13 @@ function Experience() {
   return (
     <section className="experience-section view-section" aria-labelledby="experience-title">
       <div className="wrap experience-layout">
-        <div className="experience-intro"><p className="eyebrow">A LITTLE BACKGROUND</p><h1 id="experience-title">Complexity,<br /><span>meet clarity.</span></h1><p>I enjoy working through the details that make software more useful, understandable, and dependable.</p><a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">See my résumé <span aria-hidden="true">↗</span></a></div>
+        <div className="experience-intro"><p className="eyebrow">Professional experience</p><h1 id="experience-title">Complexity,<br /><span>meet clarity.</span></h1><p>Frontend-focused engineering for the workflows people depend on: clear steps, reliable state, and details that hold up in production.</p><a className="button button-primary experience-resume" href={resumeUrl} target="_blank" rel="noreferrer">Open my résumé <span aria-hidden="true">↗</span></a></div>
         <div className="experience-content">
           <div className="experience-heading"><div><span className="mono">2024 — 2026</span><h2>Apple</h2><p>Full Stack Developer · Cupertino, CA</p></div><Star /></div>
           <p className="experience-summary">Frontend-focused work on an internal identity and access management platform: connecting people, applications, and the access they need.</p>
-          <div className="experience-list">{experience.map((item, index) => <motion.article className="experience-item" key={item.number} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 + index * .08, duration: .35 }}><span className="mono">{item.number}</span><div><h3>{item.title}</h3><p>{item.description}</p></div></motion.article>)}</div>
-          <p className="experience-stack mono">REACT / TYPESCRIPT / ANGULARJS / ZUSTAND / JAVA / SPRING BOOT</p>
-          <div className="earlier-experience"><p className="mono">BEFORE THAT</p><p><strong>Pilot Technologies</strong> · Software Engineer Intern <span>2023</span></p><p><strong>CUNY Tech Prep</strong> · Web Development Fellow <span>2022–2023</span></p><p><strong>Research Foundation of CUNY</strong> · Software Engineer Intern <span>2022</span></p></div>
+          <div className="experience-list">{experience.map((item, index) => <motion.article className="experience-item" key={item.title} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 + index * .08, duration: .35 }}><h3>{item.title}</h3><p>{item.description}</p></motion.article>)}</div>
+          <ul className="experience-stack" aria-label="Technologies"><li>React</li><li>TypeScript</li><li>AngularJS</li><li>Zustand</li><li>Java</li><li>Spring Boot</li></ul>
+          <div className="earlier-experience"><h3>Earlier experience</h3><p><strong>Pilot Technologies</strong> · Software Engineer Intern <span>2023</span></p><p><strong>CUNY Tech Prep</strong> · Web Development Fellow <span>2022–2023</span></p><p><strong>Research Foundation of CUNY</strong> · Software Engineer Intern <span>2022</span></p></div>
         </div>
       </div>
     </section>
@@ -161,11 +161,11 @@ function About() {
   const reduced = useReducedMotion()
   return (
     <section className="about-section wrap view-section" aria-labelledby="about-title">
-      <div className="about-intro"><p className="eyebrow">THE PERSON BEHIND THE CODE</p><h1 id="about-title">A little more<br /><span>about me.</span></h1><p>I’m Xingcheng, but you can call me Vincent. I’m a Queens College computer science grad who loves a good problem, a good story, and a very good pop song.</p><motion.div className="about-stamp" aria-hidden="true" whileHover={reduced ? undefined : { rotate: 8, scale: 1.06 }}><Star /><span>CURIOUS<br />BY NATURE</span></motion.div></div>
-      <div className="about-card"><div className="about-card-top"><span className="mono">OFF THE CLOCK / 01</span><Star /></div>
+      <div className="about-intro"><p className="eyebrow">About</p><h1 id="about-title">The person behind<br /><span>the interface.</span></h1><p>I’m Xingcheng, but you can call me Vincent. I’m a Queens College computer science grad who loves a good problem, a good story, and a very good pop song.</p><div className="about-facts"><div><span>Based in</span><strong>Sunnyvale, California</strong></div><div><span>Education</span><strong>Queens College · B.A. Computer Science, 2024</strong></div><div><span>Focus</span><strong>Frontend-focused · Full-stack capable</strong></div></div><motion.div className="about-stamp" aria-hidden="true" whileHover={reduced ? undefined : { rotate: 8, scale: 1.06 }}><Star /><span>CURIOUS<br />BY NATURE</span></motion.div></div>
+      <div className="about-card"><div className="about-card-top"><h2>Outside the code</h2><Star /></div>
         <div className="interest-controls" aria-label="Choose an interest"><button type="button" aria-pressed={interest === 'music'} onClick={() => setInterest('music')}>Music ♫</button><button type="button" aria-pressed={interest === 'reading'} onClick={() => setInterest('reading')}>Reading ✳</button></div>
         <div className="interest-content" aria-live="polite"><AnimatePresence mode="wait" initial={false}><motion.div key={interest} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: .2 }}>
-          {interest === 'music' ? <><p className="interest-kicker mono">SOME OF MY FAVORITES</p><h2>Pop is my<br />soundtrack<span>.</span></h2><p>From big vocals to the songs I keep coming back to — there’s always room for more on the playlist.</p><div className="artist-list">{artists.map(artist => <span key={artist}>{artist}</span>)}<span>+ many more</span></div></> : <><p className="interest-kicker mono">BETWEEN THE PAGES</p><h2>A novel kind<br />of escape<span>.</span></h2><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><Star /></div></>}
+          {interest === 'music' ? <><h3>Pop is my<br />soundtrack<span>.</span></h3><p>From big vocals to the songs I keep coming back to, there’s always room for more on the playlist.</p><div className="artist-list">{artists.map(artist => <span key={artist}>{artist}</span>)}<span>+ many more</span></div></> : <><h3>A novel kind<br />of escape<span>.</span></h3><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><Star /></div></>}
         </motion.div></AnimatePresence></div>
       </div>
     </section>
@@ -187,10 +187,9 @@ function Contact() {
 
   return (
     <section className="contact-view wrap" aria-labelledby="contact-title">
-      <div className="contact-heading-row mono"><span>THE NEXT TRACK / GET IN TOUCH</span><span>SUNNYVALE, CALIFORNIA</span></div>
+      <p className="contact-location">Sunnyvale, California · Open to the next opportunity</p>
       <div className="contact-layout">
         <div className="contact-copy">
-          <p className="eyebrow">HAVE SOMETHING IN MIND?</p>
           <h1 id="contact-title" aria-label="Let’s make something good.">Let’s make<br /><span>something</span><br />good<Star /><span className="contact-period">.</span></h1>
           <p className="contact-description">A project, an opportunity, or just a good conversation — I’d love to hear from you.</p>
           <div className="contact-actions">
@@ -201,12 +200,11 @@ function Contact() {
           <p className="contact-feedback" aria-live="polite">{copyStatus === 'copied' ? 'Email address copied.' : copyStatus === 'error' ? 'Could not copy automatically. You can select the address above.' : ''}</p>
         </div>
         <motion.div className="contact-postcard" aria-hidden="true" initial={reduced ? { opacity: 0 } : { opacity: 0, rotate: -5, y: 20 }} animate={{ opacity: 1, rotate: 0, y: 0 }} transition={{ duration: .6, delay: .12, ease: [0.22, 1, 0.36, 1] }} whileHover={reduced ? undefined : { rotate: -2, y: -5 }}>
-          <div className="postcard-top mono"><span>A NOTE FROM VINCENT</span><span>NO. 01 / HELLO</span></div>
           <div className="postcard-title">GOOD<br />IDEAS<br /><span>WELCOME</span><span className="postcard-dot">.</span></div>
           <div className="postcard-bottom"><div className="postcard-stamp"><Star /><span>LET’S<br />CONNECT</span></div><p className="mono">GOOD WORK.<br />GOOD MUSIC.<br />GOOD COMPANY.</p></div>
         </motion.div>
       </div>
-      <div className="contact-elsewhere"><div><span className="eyebrow">FIND ME ELSEWHERE</span><p>More places to connect and explore.</p></div><div className="contact-socials"><a href="https://github.com/XingchengH" target="_blank" rel="noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/xingcheng-huang67/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a><a href={resumeUrl} target="_blank" rel="noreferrer"><span>Résumé</span><span aria-hidden="true">↗</span></a></div></div>
+      <div className="contact-elsewhere"><div><h2>Connect elsewhere</h2><p>More places to connect and explore.</p></div><div className="contact-socials"><a href="https://github.com/XingchengH" target="_blank" rel="noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/xingcheng-huang67/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a><a href={resumeUrl} target="_blank" rel="noreferrer"><span>Résumé</span><span aria-hidden="true">↗</span></a></div></div>
     </section>
   )
 }
