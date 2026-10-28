@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'motion/react'
 import { HashRouter, Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { artists, experience, projects } from './content'
+import { ChatDemo, MusicDemo } from './ProjectDemos'
 
 const resumeUrl = `${import.meta.env.BASE_URL}xingcheng-huang-resume.pdf`
 const pageNames: Record<string, string> = {
@@ -95,6 +96,8 @@ function PageHeading({ id, eyebrow, title, detail }: { id: string; eyebrow: stri
 
 function ProjectArtwork({ type, label, image }: { type: string; label: string; image?: string }) {
   if (image) return <figure className="project-product-shot"><img src={`${import.meta.env.BASE_URL}${image}`} alt={label} /><figcaption>Real product demo · Inline Scheduler</figcaption></figure>
+  if (type === 'chat') return <ChatDemo />
+  if (type === 'music') return <MusicDemo />
   return (
     <div className={`project-art project-art--${type}`} role="img" aria-label={label}>
       {type === 'chat' && <><span className="art-chat art-chat-one">HELLO</span><span className="art-chat art-chat-two">RIGHT<br />HERE ↗</span><span className="art-caption">Concept artwork · Real-Time Chat</span></>}
