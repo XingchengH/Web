@@ -37,6 +37,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .site-header { min-height: 99px; display: flex; justify-content: space-between; gap: 24px; align-items: center; border-bottom: 1px solid var(--line); }
 .wordmark { font: 700 22px/1 var(--display); letter-spacing: -.08em; white-space: nowrap; }
 .wordmark .star { margin-inline: 1px; }
+.wordmark-letter { animation: wordmark-color-wave 1.5s ease-in-out infinite alternate; }
+@keyframes wordmark-color-wave { from { color: var(--ink); } to { color: #087989; } }
 .header-note { border: 1px solid var(--line); border-radius: 99px; padding: 8px 13px; color: var(--muted); font: 500 10px/1 var(--display); letter-spacing: .02em; }
 .site-header nav { display: flex; align-items: center; gap: clamp(18px, 2vw, 30px); font-size: 13px; font-weight: 500; }
 .site-header nav a { padding-block: 12px; }
@@ -313,5 +315,6 @@ h1, h2, h3, h4, p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .wordmark-letter { animation: none; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
