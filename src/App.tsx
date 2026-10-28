@@ -23,7 +23,11 @@ function Header() {
   return (
     <header className="site-header wrap">
       <Link className="wordmark" to="/" aria-label="Xingcheng Huang, home">
-        <span aria-hidden="true">{'VINCENT'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${index * 0.2}s` }} key={index}>{letter}</span>)}</span><Star /><span aria-hidden="true">HUANG</span>
+        <span aria-hidden="true">
+          {'VINCENT'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${index * 0.2}s` }} key={`first-${letter}-${index}`}>{letter}</span>)}
+          <Star />
+          {'HUANG'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${(index + 8) * 0.2}s` }} key={`last-${letter}-${index}`}>{letter}</span>)}
+        </span>
       </Link>
       <span className="header-note">FRONTEND ENGINEER · POP ON REPEAT</span>
       <nav aria-label="Main navigation">
