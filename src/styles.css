@@ -114,7 +114,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .art-music-disc > span { width: 40%; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #f2a99f; text-align: center; font: 700 11px/.95 var(--display); letter-spacing: -.03em; }
 
 /* Source-based project demos */
-.project-demo { position: relative; display: flex; min-height: clamp(340px, 32vw, 410px); flex-direction: column; margin: 0; overflow: hidden; border: 1.5px solid var(--ink); border-radius: var(--radius-lg); background: #fff; }
+.project-demo { position: relative; display: flex; height: clamp(340px, 32vw, 410px); flex-direction: column; margin: 0; overflow: hidden; border: 1.5px solid var(--ink); border-radius: var(--radius-lg); background: #fff; }
 .demo-window-bar { display: grid; min-height: 39px; flex: 0 0 auto; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding-inline: 14px; background: var(--ink); color: var(--paper); font: 650 10px/1 var(--display); }
 .demo-window-bar > span:nth-child(2) { text-align: center; }
 .demo-window-bar button { justify-self: end; padding: 5px 7px; border: 0; border-radius: 6px; background: #ffffff19; color: inherit; font-size: 9px; cursor: pointer; transition: background-color .2s ease; }
@@ -408,7 +408,7 @@ h1, h2, h3, h4, p { margin: 0; }
   .project-choice-name small, .choice-arrow, .picker-note { display: none; }
   .project-detail-view .project-art { min-height: 270px; }
   .project-product-shot { min-height: 220px; }
-  .project-demo { min-height: 335px; }
+  .project-demo { height: 335px; }
   .chat-demo-ui { grid-template-columns: 68px 1fr; }
   .chat-demo-sidebar-title { justify-content: center; padding-inline: 6px; }
   .chat-demo-sidebar-title span, .chat-demo-contact > span:last-child { display: none; }
