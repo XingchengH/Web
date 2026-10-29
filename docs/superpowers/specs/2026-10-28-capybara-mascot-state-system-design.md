@@ -1,7 +1,7 @@
 # Capybara Mascot State System
 
 Date: 2026-10-28
-Status: Approved visual direction; awaiting written-spec review
+Status: Approved for implementation
 
 ## Purpose
 
@@ -31,7 +31,7 @@ The four poses and their roles are:
 
 Use a hybrid asset system.
 
-- The animated pet uses four separately cropped transparent WebP assets under `public/pet/`. Each asset uses a 224 by 152 transparent canvas so it renders crisply at the 112 by 76 CSS-pixel desktop size.
+- The animated pet uses four transparent pose assets under `public/pet/`. Pose-specific SVG crop wrappers reference one optimized transparent PNG character sheet, so the browser downloads the source artwork once while every state keeps a precise crop and fixed stage.
 - The repeated inline mark uses a simplified SVG derived from the roaming or resting silhouette. Its outline and palette match the pet, while its geometry is reduced so it remains readable at 12–30 pixels.
 - The original generated character sheet is retained as a source/reference asset, while the website loads only the optimized per-pose files.
 - All pose images render inside one fixed-size stage with `object-fit: contain`, so switching states never changes layout.
