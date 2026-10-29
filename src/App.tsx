@@ -19,15 +19,14 @@ const navItems = [
 
 function Capybara({ className = '' }: { className?: string }) {
   return <span className={`capybara-mark ${className}`} aria-hidden="true">
-    <svg viewBox="0 0 54 30" focusable="false">
-      <path className="capybara-body" d="M2 15.5C2 8.4 7.2 3 14.4 3h15.2c5.7 0 10.2 3.1 12.2 8h4.1c4.4 0 7.6 3.1 7.6 7.1 0 4.9-3.9 8.9-8.8 8.9H11.8C6.4 27 2 22.6 2 17.2Z" />
-      <path className="capybara-leg" d="M9 23h8l-1.4 6H11zM30 23h8l-1.4 6H32z" />
-      <circle className="capybara-ear" cx="36" cy="7" r="4.5" />
-      <circle className="capybara-ear-inner" cx="36" cy="7" r="2" />
-      <ellipse className="capybara-muzzle" cx="46" cy="19" rx="6" ry="4.7" />
-      <circle className="capybara-eye" cx="43" cy="13" r="1.7" />
-      <circle className="capybara-pupil" cx="43.2" cy="13.1" r=".8" />
-      <circle className="capybara-nose" cx="51" cy="19" r="1.5" />
+    <svg viewBox="0 0 64 42" focusable="false">
+      <path className="capybara-body" d="M4 23.2C4 13.1 11.2 6 20.5 6h14.2c4.6 0 8.2 1.7 10.7 4.8 1.7-.9 3.7-1.3 5.6-1 6.2.9 10 6.4 10 13.3C61 29.5 55.7 34 48.7 34H16.8C9.3 34 4 30.3 4 23.2Z" />
+      <path className="capybara-leg" d="M15 31.5v5.8c0 1.4 1.1 2.4 2.5 2.4h3.8M39 32v5.3c0 1.4 1.1 2.4 2.5 2.4h3.8" />
+      <circle className="capybara-ear" cx="47" cy="10.6" r="4.4" />
+      <circle className="capybara-ear-inner" cx="47.2" cy="10.8" r="1.7" />
+      <circle className="capybara-eye" cx="53.2" cy="17.4" r="1.45" />
+      <path className="capybara-face-line" d="M59.8 26.2c-2.6 1-5.2.9-7.4-.1" />
+      <circle className="capybara-nose" cx="60" cy="23.6" r="1.75" />
     </svg>
   </span>
 }
