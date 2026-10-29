@@ -339,11 +339,33 @@ h1, h2, h3, h4, p { margin: 0; }
 .pet-pose > svg { display: block; width: 100%; height: 100%; overflow: hidden; }
 .pet-pose-fallback { width: 82px; height: 48px; }
 .pet-pose > svg, .pet-pose-fallback { transform-origin: center bottom; }
-.pet-model.is-walking .pet-pose > svg { animation: pet-walk-bob .48s ease-in-out infinite alternate; }
-.pet-model.is-resting .pet-pose > svg { animation: pet-rest 3.2s ease-in-out infinite; }
-.pet-model.is-eating .pet-pose > svg { animation: pet-nibble .5s ease-in-out infinite alternate; }
-.pet-model.is-sleeping .pet-pose > svg { animation: pet-sleep 4s ease-in-out infinite; }
+.pet-artwork-layer { transform-box: view-box; transform-origin: center bottom; }
+.pet-pose-shadow { fill: #29224828; transform-box: fill-box; transform-origin: center; }
+.pet-pose-details { pointer-events: none; }
+.pet-pose-details path { fill: none; stroke: #171514; stroke-width: 2; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.pet-pose-details circle { fill: #171514; vector-effect: non-scaling-stroke; }
+.pet-model.is-walking .pet-pose > svg { animation: pet-walk-bob .46s cubic-bezier(.45, 0, .55, 1) infinite; }
+.pet-model.is-walking .pet-artwork-layer { animation: pet-walk-stride .46s cubic-bezier(.45, 0, .55, 1) infinite; }
+.pet-model.is-walking .pet-pose-shadow { animation: pet-walk-shadow .46s ease-in-out infinite; }
+.pet-model.is-resting .pet-pose > svg { animation: pet-rest 3.6s ease-in-out infinite; }
+.pet-model.is-resting .pet-pose-shadow { animation: pet-rest-shadow 3.6s ease-in-out infinite; }
+.pet-model.is-eating .pet-pose > svg { animation: pet-nibble .62s ease-in-out infinite; }
+.pet-model.is-eating .pet-artwork-layer { animation: pet-chew .62s ease-in-out infinite; }
+.pet-model.is-eating .pet-pose-shadow { animation: pet-eat-shadow .62s ease-in-out infinite; }
+.pet-model.is-sleeping .pet-pose > svg { animation: pet-sleep 4.6s ease-in-out infinite; }
+.pet-model.is-sleeping .pet-artwork-layer { animation: pet-sleep-deepen 4.6s ease-in-out infinite; }
 .pet-model.is-guiding .pet-pose > svg { animation: pet-guide-sway 2.4s ease-in-out infinite; }
+.pet-model.is-guiding .pet-artwork-layer { animation: pet-guide-greet 2.4s ease-in-out infinite; }
+.pet-eating-lines { transform-box: fill-box; transform-origin: left center; animation: pet-eat-lines .62s ease-out infinite; }
+.pet-walking-dust circle { fill: #9e8767; animation: pet-dust 1.38s ease-out infinite; }
+.pet-walking-dust circle:nth-child(2) { animation-delay: .22s; }
+.pet-walking-dust circle:nth-child(3) { animation-delay: .44s; }
+.pet-resting-breath { animation: pet-breath-lines 3.6s ease-in-out infinite; }
+.pet-resting-breath path { stroke: var(--purple); }
+.pet-resting-breath path:last-child { animation-delay: .45s; }
+.pet-guiding-lines { transform-box: fill-box; transform-origin: left center; animation: pet-guide-lines 2.4s ease-in-out infinite; }
+.pet-guiding-lines path { stroke: var(--purple); }
+.pet-guiding-lines circle { fill: var(--lime); }
 .pet-sleep-marks { position: absolute; right: 2px; top: -5px; width: 28px; height: 34px; color: var(--purple); font: 750 12px/1 var(--display); }
 .pet-model.is-facing-left .pet-sleep-marks { transform: scaleX(-1); }
 .pet-sleep-marks i { position: absolute; right: 2px; bottom: 2px; font-style: normal; animation: pet-dream 2.3s ease-out infinite; }
@@ -364,11 +386,22 @@ h1, h2, h3, h4, p { margin: 0; }
 .pet-hide { margin-top: 10px; padding: 0; border: 0; background: transparent; color: #c8c1d9; font-size: 10px; cursor: pointer; }
 .pet-hide:hover { color: #fff; }
 .pet-guided-target { outline: 3px solid #b49d7d !important; outline-offset: 6px; animation: pet-target-focus 1.8s ease; }
-@keyframes pet-walk-bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes pet-walk-bob { 0%, 100% { transform: translateY(1px) rotate(-.7deg); } 50% { transform: translateY(-3px) rotate(.7deg); } }
+@keyframes pet-walk-stride { 0%, 100% { transform: scaleX(.985) scaleY(1.015); } 50% { transform: scaleX(1.018) scaleY(.975); } }
+@keyframes pet-walk-shadow { 0%, 100% { opacity: .7; transform: scaleX(1); } 50% { opacity: .45; transform: scaleX(.88); } }
 @keyframes pet-rest { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(1px) scaleY(.98); } }
-@keyframes pet-nibble { from { transform: translateY(0) rotate(0); } to { transform: translateY(2px) rotate(-2deg); } }
+@keyframes pet-rest-shadow { 0%, 100% { opacity: .55; transform: scaleX(.95); } 50% { opacity: .72; transform: scaleX(1.02); } }
+@keyframes pet-nibble { 0%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(1px) rotate(-1.2deg); } 65% { transform: translateY(2px) rotate(-2deg); } }
+@keyframes pet-chew { 0%, 100% { transform: scaleY(1); } 45% { transform: translateY(1px) scaleY(.985); } 70% { transform: translateY(2px) scaleY(.97); } }
+@keyframes pet-eat-shadow { 0%, 100% { opacity: .55; transform: scaleX(.95); } 60% { opacity: .72; transform: scaleX(1.03); } }
+@keyframes pet-eat-lines { 0%, 100% { opacity: .15; transform: scale(.82); } 38%, 68% { opacity: 1; transform: scale(1); } }
 @keyframes pet-sleep { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(1px) scaleY(.97); } }
+@keyframes pet-sleep-deepen { 0%, 100% { transform: scaleX(1) scaleY(1); } 50% { transform: translateY(1px) scaleX(1.012) scaleY(.988); } }
 @keyframes pet-guide-sway { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: translateY(-2px) rotate(1.5deg); } }
+@keyframes pet-guide-greet { 0%, 100% { transform: rotate(-.7deg); } 50% { transform: translateY(-1px) rotate(.9deg); } }
+@keyframes pet-guide-lines { 0%, 25%, 100% { opacity: .2; transform: scale(.86); } 45%, 70% { opacity: 1; transform: scale(1); } }
+@keyframes pet-dust { 0% { opacity: 0; transform: translate(4px, 2px) scale(.7); } 30% { opacity: .75; } 100% { opacity: 0; transform: translate(-8px, -5px) scale(1.25); } }
+@keyframes pet-breath-lines { 0%, 15%, 100% { opacity: 0; transform: translateX(-2px); } 45%, 70% { opacity: .75; transform: translateX(2px); } }
 @keyframes pet-dream { 0% { opacity: 0; transform: translateY(4px) scale(.85); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateY(-13px) scale(1.08); } }
 @keyframes pet-target-focus { 0%, 100% { outline-offset: 6px; } 50% { outline-offset: 11px; } }
 
@@ -493,5 +526,5 @@ h1, h2, h3, h4, p { margin: 0; }
   html { scroll-behavior: auto; }
   .wordmark-letter { animation: none; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .pet-model, .pet-pose > svg, .pet-pose-fallback, .pet-sleep-marks i { animation: none !important; }
+  .pet-model, .pet-pose > svg, .pet-pose-fallback, .pet-artwork-layer, .pet-pose-shadow, .pet-pose-details *, .pet-sleep-marks i { animation: none !important; }
 }
