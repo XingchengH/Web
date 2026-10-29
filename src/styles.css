@@ -36,12 +36,11 @@ h1, h2, h3, h4, p { margin: 0; }
 .wrap { width: min(100% - 96px, 1320px); margin-inline: auto; }
 .mono, .eyebrow { font-family: var(--display); font-weight: 600; font-size: 12px; line-height: 1.4; letter-spacing: .08em; }
 .eyebrow { color: var(--muted); }
-.capybara-mark { display: inline-flex; width: 1.42em; height: .9em; flex: 0 0 auto; line-height: 1; vertical-align: -.1em; transform-origin: 50% 80%; transition: transform .3s ease; }
+.capybara-mark { display: inline-flex; width: 1.58em; height: .9em; flex: 0 0 auto; line-height: 1; vertical-align: -.1em; transform-origin: 50% 80%; transition: transform .3s ease; }
 .capybara-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.capybara-body, .capybara-ear { fill: #c8b493; stroke: #171514; stroke-width: 2.15px; stroke-linejoin: round; }
-.capybara-leg, .capybara-face-line { fill: none; stroke: #171514; stroke-width: 2.15px; stroke-linecap: round; stroke-linejoin: round; }
-.capybara-ear-inner { fill: #9e8567; }
-.capybara-eye, .capybara-nose { fill: #171514; }
+.capybara-mark-body, .capybara-mark-ear { fill: #e3c792; stroke: #171514; stroke-width: 2.2px; stroke-linejoin: round; }
+.capybara-mark-eye, .capybara-mark-nose { fill: #171514; }
+.capybara-mark-line { fill: none; stroke: #171514; stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .skip-link { position: absolute; left: 12px; top: -100px; z-index: 20; padding: 12px; border-radius: var(--radius-sm); background: var(--lime); color: var(--ink); }
 .skip-link:focus { top: 12px; }
@@ -336,6 +335,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .pet-character-button:focus-visible { border-radius: 26px; outline-color: #b49d7d; }
 .pet-model { position: absolute; inset: 0; display: block; transform-origin: center bottom; transition: transform .25s ease; }
 .pet-model.is-facing-left { transform: scaleX(-1); }
+.pet-pose { position: absolute; inset: 0; display: grid; place-items: center; }
+.pet-pose > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pet-pose-fallback { width: 82px; height: 48px; }
 .pet-ground-shadow { position: absolute; left: 9px; bottom: 5px; width: 92px; height: 11px; border-radius: 50%; background: #2922482b; transform: scaleX(.88); }
 .pet-body { position: absolute; left: 5px; top: 18px; z-index: 2; width: 75px; height: 42px; overflow: hidden; border: 3px solid #171514; border-radius: 53% 46% 43% 49%; background: #c8b493; box-shadow: inset 8px 7px 0 #ddcbae, inset -8px -7px 0 #aa9273; }
 .pet-body-highlight { position: absolute; left: 17px; top: 7px; width: 27px; height: 7px; border-radius: 50%; background: #ead9bb; opacity: .86; transform: rotate(-4deg); }

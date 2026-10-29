@@ -4,6 +4,7 @@ import { HashRouter, Link, NavLink, Navigate, Route, Routes, useLocation } from 
 import { artists, experience, projects } from './content'
 import { ChatDemo, MusicDemo } from './ProjectDemos'
 import CapybaraPet from './CapybaraPet'
+import CapybaraMark from './CapybaraMark'
 
 const resumeUrl = `${import.meta.env.BASE_URL}xingcheng-huang-resume.pdf`
 const pageNames: Record<string, string> = {
@@ -17,27 +18,13 @@ const navItems = [
   { label: 'Contact', to: '/contact' },
 ]
 
-function Capybara({ className = '' }: { className?: string }) {
-  return <span className={`capybara-mark ${className}`} aria-hidden="true">
-    <svg viewBox="0 0 64 42" focusable="false">
-      <path className="capybara-body" d="M4 23.2C4 13.1 11.2 6 20.5 6h14.2c4.6 0 8.2 1.7 10.7 4.8 1.7-.9 3.7-1.3 5.6-1 6.2.9 10 6.4 10 13.3C61 29.5 55.7 34 48.7 34H16.8C9.3 34 4 30.3 4 23.2Z" />
-      <path className="capybara-leg" d="M15 31.5v5.8c0 1.4 1.1 2.4 2.5 2.4h3.8M39 32v5.3c0 1.4 1.1 2.4 2.5 2.4h3.8" />
-      <circle className="capybara-ear" cx="47" cy="10.6" r="4.4" />
-      <circle className="capybara-ear-inner" cx="47.2" cy="10.8" r="1.7" />
-      <circle className="capybara-eye" cx="53.2" cy="17.4" r="1.45" />
-      <path className="capybara-face-line" d="M59.8 26.2c-2.6 1-5.2.9-7.4-.1" />
-      <circle className="capybara-nose" cx="60" cy="23.6" r="1.75" />
-    </svg>
-  </span>
-}
-
 function Header() {
   return (
     <header className="site-header wrap">
       <Link className="wordmark" to="/" aria-label="Xingcheng Huang, home">
         <span aria-hidden="true">
           {'VINCENT'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${index * 0.2}s` }} key={`first-${letter}-${index}`}>{letter}</span>)}
-          <Capybara />
+          <CapybaraMark />
           {'HUANG'.split('').map((letter, index) => <span className="wordmark-letter" style={{ animationDelay: `${(index + 8) * 0.2}s` }} key={`last-${letter}-${index}`}>{letter}</span>)}
         </span>
       </Link>
@@ -65,7 +52,7 @@ function Cover() {
       <div className="cover">
         <div className="cover-top mono"><span>THE VINCENT MIX</span><span>ENGINEERING / POP STUDIO</span></div>
         <div className="cover-title">CODE<br />MEETS<br />POP<span>.</span></div>
-        <div className="cover-bottom"><span className="mono">CLEAR INTERFACES<br />CURIOUS BY NATURE</span><div className="cover-record" aria-hidden="true"><Capybara /></div></div>
+        <div className="cover-bottom"><span className="mono">CLEAR INTERFACES<br />CURIOUS BY NATURE</span><div className="cover-record" aria-hidden="true"><CapybaraMark /></div></div>
       </div>
       <span className="cover-caption mono">SIDE A: ENGINEERING &nbsp; / &nbsp; SIDE B: THE PERSON</span>
     </motion.div>
@@ -88,21 +75,21 @@ function Home() {
           <motion.p {...reveal(.19)}>I’m Xingcheng (Vincent), a React and TypeScript engineer who builds dependable enterprise workflows and thoughtful web experiences.</motion.p>
           <motion.div className="hero-actions" {...reveal(.27)}>
             <Link className="button button-primary" to="/experience">See my experience <span aria-hidden="true">↗</span></Link>
-            <a className="button button-outline" href={resumeUrl} target="_blank" rel="noreferrer">Open résumé <Capybara /></a>
+            <a className="button button-outline" href={resumeUrl} target="_blank" rel="noreferrer">Open résumé <CapybaraMark /></a>
           </motion.div>
           <motion.div className="hero-proof" {...reveal(.36)}><span>React + TypeScript</span><span>Enterprise workflows</span><span>Frontend-focused</span></motion.div>
         </div>
         <Cover />
       </section>
       <div className="wrap"><div className="marquee" aria-label="Engineering, good interfaces, pop music, new ideas">
-        {['React + TypeScript', 'Enterprise workflows', 'Reliable interfaces', 'Pop on repeat'].map(word => <span className="marquee-item" key={word}>{word}<Capybara /></span>)}
+        {['React + TypeScript', 'Enterprise workflows', 'Reliable interfaces', 'Pop on repeat'].map(word => <span className="marquee-item" key={word}>{word}<CapybaraMark /></span>)}
       </div></div>
     </div>
   )
 }
 
 function PageHeading({ id, eyebrow, title, detail }: { id: string; eyebrow: string; title: string; detail: string }) {
-  return <div className="page-heading"><div><p className="eyebrow">{eyebrow}</p><h1 id={id}>{title}<Capybara /></h1></div><p className="page-heading-detail">{detail}</p></div>
+  return <div className="page-heading"><div><p className="eyebrow">{eyebrow}</p><h1 id={id}>{title}<CapybaraMark /></h1></div><p className="page-heading-detail">{detail}</p></div>
 }
 
 function ProjectArtwork({ type, label, image }: { type: string; label: string; image?: string }) {
@@ -133,7 +120,7 @@ function Work() {
               <span className="project-choice-name">{item.title}<small>{item.category}</small></span><span className="choice-arrow" aria-hidden="true">↗</span>
             </motion.button>
           ))}
-          <p className="picker-note">Each selection opens the project story, tools, and source. <Capybara /></p>
+          <p className="picker-note">Each selection opens the project story, tools, and source. <CapybaraMark /></p>
         </div>
         <div className="project-stage" aria-live="polite">
           <AnimatePresence mode="wait" initial={false}>
@@ -163,7 +150,7 @@ function Experience() {
       <div className="wrap experience-layout">
         <div className="experience-intro"><p className="eyebrow">Professional experience</p><h1 id="experience-title">Complexity,<br /><span>meet clarity.</span></h1><p>Frontend-focused engineering for the workflows people depend on: clear steps, reliable state, and details that hold up in production.</p><a className="button button-primary experience-resume" href={resumeUrl} target="_blank" rel="noreferrer">Open my résumé <span aria-hidden="true">↗</span></a></div>
         <div className="experience-content">
-          <div className="experience-heading"><div><span className="mono">2024 — 2026</span><h2>Apple</h2><p>Full Stack Developer · Cupertino, CA</p></div><Capybara /></div>
+          <div className="experience-heading"><div><span className="mono">2024 — 2026</span><h2>Apple</h2><p>Full Stack Developer · Cupertino, CA</p></div><CapybaraMark /></div>
           <p className="experience-summary">Frontend-focused work on an internal identity and access management platform: connecting people, applications, and the access they need.</p>
           <div className="experience-list">{experience.map((item, index) => <motion.article className="experience-item" key={item.title} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 + index * .08, duration: .35 }}><h3>{item.title}</h3><p>{item.description}</p></motion.article>)}</div>
           <ul className="experience-stack" aria-label="Technologies"><li>React</li><li>TypeScript</li><li>AngularJS</li><li>Zustand</li><li>Java</li><li>Spring Boot</li></ul>
@@ -179,11 +166,11 @@ function About() {
   const reduced = useReducedMotion()
   return (
     <section className="about-section wrap view-section" aria-labelledby="about-title">
-      <div className="about-intro"><p className="eyebrow">About</p><h1 id="about-title">The person behind<br /><span>the interface.</span></h1><p>I’m Xingcheng, but you can call me Vincent. I’m a Queens College computer science grad who loves a good problem, a good story, and a very good pop song.</p><div className="about-facts"><div><span>Based in</span><strong>Sunnyvale, California</strong></div><div><span>Education</span><strong>Queens College · B.A. Computer Science, 2024</strong></div><div><span>Focus</span><strong>Frontend-focused · Full-stack capable</strong></div></div><motion.div className="about-stamp" aria-hidden="true" whileHover={reduced ? undefined : { rotate: 8, scale: 1.06 }}><Capybara /><span>CURIOUS<br />BY NATURE</span></motion.div></div>
-      <div className="about-card"><div className="about-card-top"><h2>Outside the code</h2><Capybara /></div>
-        <div className="interest-controls" aria-label="Choose an interest"><button type="button" aria-pressed={interest === 'music'} onClick={() => setInterest('music')}>Music ♫</button><button type="button" aria-pressed={interest === 'reading'} onClick={() => setInterest('reading')}>Reading <Capybara /></button></div>
+      <div className="about-intro"><p className="eyebrow">About</p><h1 id="about-title">The person behind<br /><span>the interface.</span></h1><p>I’m Xingcheng, but you can call me Vincent. I’m a Queens College computer science grad who loves a good problem, a good story, and a very good pop song.</p><div className="about-facts"><div><span>Based in</span><strong>Sunnyvale, California</strong></div><div><span>Education</span><strong>Queens College · B.A. Computer Science, 2024</strong></div><div><span>Focus</span><strong>Frontend-focused · Full-stack capable</strong></div></div><motion.div className="about-stamp" aria-hidden="true" whileHover={reduced ? undefined : { rotate: 8, scale: 1.06 }}><CapybaraMark /><span>CURIOUS<br />BY NATURE</span></motion.div></div>
+      <div className="about-card"><div className="about-card-top"><h2>Outside the code</h2><CapybaraMark /></div>
+        <div className="interest-controls" aria-label="Choose an interest"><button type="button" aria-pressed={interest === 'music'} onClick={() => setInterest('music')}>Music ♫</button><button type="button" aria-pressed={interest === 'reading'} onClick={() => setInterest('reading')}>Reading <CapybaraMark /></button></div>
         <div className="interest-content" aria-live="polite"><AnimatePresence mode="wait" initial={false}><motion.div key={interest} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: .2 }}>
-          {interest === 'music' ? <><h3>Pop is my<br />soundtrack<span>.</span></h3><p>From big vocals to the songs I keep coming back to, there’s always room for more on the playlist.</p><div className="artist-list">{artists.map(artist => <span key={artist}>{artist}</span>)}<span>+ many more</span></div></> : <><h3>A novel kind<br />of escape<span>.</span></h3><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><Capybara /></div></>}
+          {interest === 'music' ? <><h3>Pop is my<br />soundtrack<span>.</span></h3><p>From big vocals to the songs I keep coming back to, there’s always room for more on the playlist.</p><div className="artist-list">{artists.map(artist => <span key={artist}>{artist}</span>)}<span>+ many more</span></div></> : <><h3>A novel kind<br />of escape<span>.</span></h3><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><CapybaraMark /></div></>}
         </motion.div></AnimatePresence></div>
       </div>
     </section>
@@ -208,7 +195,7 @@ function Contact() {
       <p className="contact-location">Sunnyvale, California · Open to the next opportunity</p>
       <div className="contact-layout">
         <div className="contact-copy">
-          <h1 id="contact-title" aria-label="Let’s make something good.">Let’s make<br /><span>something</span><br />good<Capybara /><span className="contact-period">.</span></h1>
+          <h1 id="contact-title" aria-label="Let’s make something good.">Let’s make<br /><span>something</span><br />good<CapybaraMark /><span className="contact-period">.</span></h1>
           <p className="contact-description">A project, an opportunity, or just a good conversation — I’d love to hear from you.</p>
           <div className="contact-actions">
             <a className="contact-primary" href="mailto:Huangxcxc@gmail.com">Send me an email <span aria-hidden="true">↗</span></a>
@@ -219,7 +206,7 @@ function Contact() {
         </div>
         <motion.div className="contact-postcard" aria-hidden="true" initial={reduced ? { opacity: 0 } : { opacity: 0, rotate: -5, y: 20 }} animate={{ opacity: 1, rotate: 0, y: 0 }} transition={{ duration: .6, delay: .12, ease: [0.22, 1, 0.36, 1] }} whileHover={reduced ? undefined : { rotate: -2, y: -5 }}>
           <div className="postcard-title">GOOD<br />IDEAS<br /><span>WELCOME</span><span className="postcard-dot">.</span></div>
-          <div className="postcard-bottom"><div className="postcard-stamp"><Capybara /><span>LET’S<br />CONNECT</span></div><p className="mono">GOOD WORK.<br />GOOD MUSIC.<br />GOOD COMPANY.</p></div>
+          <div className="postcard-bottom"><div className="postcard-stamp"><CapybaraMark /><span>LET’S<br />CONNECT</span></div><p className="mono">GOOD WORK.<br />GOOD MUSIC.<br />GOOD COMPANY.</p></div>
         </motion.div>
       </div>
       <div className="contact-elsewhere"><div><h2>Connect elsewhere</h2><p>More places to connect and explore.</p></div><div className="contact-socials"><a href="https://github.com/XingchengH" target="_blank" rel="noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/xingcheng-huang67/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a><a href={resumeUrl} target="_blank" rel="noreferrer"><span>Résumé</span><span aria-hidden="true">↗</span></a></div></div>
