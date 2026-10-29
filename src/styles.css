@@ -336,14 +336,14 @@ h1, h2, h3, h4, p { margin: 0; }
 .pet-model { position: absolute; inset: 0; display: block; transform-origin: center bottom; transition: transform .25s ease; }
 .pet-model.is-facing-left { transform: scaleX(-1); }
 .pet-pose { position: absolute; inset: 0; display: grid; place-items: center; }
-.pet-pose > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pet-pose > svg { display: block; width: 100%; height: 100%; overflow: hidden; }
 .pet-pose-fallback { width: 82px; height: 48px; }
-.pet-pose > img, .pet-pose-fallback { transform-origin: center bottom; }
-.pet-model.is-walking .pet-pose > img { animation: pet-walk-bob .48s ease-in-out infinite alternate; }
-.pet-model.is-resting .pet-pose > img { animation: pet-rest 3.2s ease-in-out infinite; }
-.pet-model.is-eating .pet-pose > img { animation: pet-nibble .5s ease-in-out infinite alternate; }
-.pet-model.is-sleeping .pet-pose > img { animation: pet-sleep 4s ease-in-out infinite; }
-.pet-model.is-guiding .pet-pose > img { animation: pet-guide-sway 2.4s ease-in-out infinite; }
+.pet-pose > svg, .pet-pose-fallback { transform-origin: center bottom; }
+.pet-model.is-walking .pet-pose > svg { animation: pet-walk-bob .48s ease-in-out infinite alternate; }
+.pet-model.is-resting .pet-pose > svg { animation: pet-rest 3.2s ease-in-out infinite; }
+.pet-model.is-eating .pet-pose > svg { animation: pet-nibble .5s ease-in-out infinite alternate; }
+.pet-model.is-sleeping .pet-pose > svg { animation: pet-sleep 4s ease-in-out infinite; }
+.pet-model.is-guiding .pet-pose > svg { animation: pet-guide-sway 2.4s ease-in-out infinite; }
 .pet-sleep-marks { position: absolute; right: 2px; top: -5px; width: 28px; height: 34px; color: var(--purple); font: 750 12px/1 var(--display); }
 .pet-model.is-facing-left .pet-sleep-marks { transform: scaleX(-1); }
 .pet-sleep-marks i { position: absolute; right: 2px; bottom: 2px; font-style: normal; animation: pet-dream 2.3s ease-out infinite; }
@@ -493,5 +493,5 @@ h1, h2, h3, h4, p { margin: 0; }
   html { scroll-behavior: auto; }
   .wordmark-letter { animation: none; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .pet-model, .pet-pose > img, .pet-pose-fallback, .pet-sleep-marks i { animation: none !important; }
+  .pet-model, .pet-pose > svg, .pet-pose-fallback, .pet-sleep-marks i { animation: none !important; }
 }
