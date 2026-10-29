@@ -3,6 +3,7 @@ import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'motion/
 import { HashRouter, Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { artists, experience, projects } from './content'
 import { ChatDemo, MusicDemo } from './ProjectDemos'
+import CapybaraPet from './CapybaraPet'
 
 const resumeUrl = `${import.meta.env.BASE_URL}xingcheng-huang-resume.pdf`
 const pageNames: Record<string, string> = {
@@ -248,7 +249,7 @@ function AppShell() {
         <Routes location={location}><Route path="/" element={<Home />} /><Route path="/work" element={<Work />} /><Route path="/experience" element={<Experience />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
       </motion.div>
     </AnimatePresence>
-  </main><Footer /></div>
+  </main><Footer /><CapybaraPet /></div>
 }
 
 export default function App() {
