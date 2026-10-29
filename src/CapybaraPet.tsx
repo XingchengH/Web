@@ -233,7 +233,7 @@ export default function CapybaraPet() {
       initial={{ opacity: 0, y: 12, x }}
       animate={{ opacity: 1, y: 0, x }}
       transition={{
-        x: { duration: walking ? 3.2 : .35, ease: [0.45, 0, 0.2, 1] },
+        x: { duration: walking && !reduced ? 3.2 : 0, ease: [0.45, 0, 0.2, 1] },
         opacity: { duration: .25 },
         y: { duration: .35 },
       }}
