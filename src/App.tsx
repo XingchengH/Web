@@ -18,6 +18,17 @@ const navItems = [
   { label: 'Contact', to: '/contact' },
 ]
 
+const musicDirections = [
+  { label: 'Pop divas', query: 'pop divas' },
+  { label: 'Mandopop classics', query: 'Mandopop classics' },
+  { label: 'Big vocal ballads', query: 'vocal ballads' },
+  { label: 'New releases', query: 'new pop releases' },
+] as const
+
+function spotifySearchUrl(query: string) {
+  return `https://open.spotify.com/search/${encodeURIComponent(query)}`
+}
+
 function Header() {
   return (
     <header className="site-header wrap">
@@ -163,14 +174,30 @@ function Experience() {
 
 function About() {
   const [interest, setInterest] = useState<'music' | 'reading'>('music')
+  const [selectedArtist, setSelectedArtist] = useState<string | null>(null)
+  const [moreMusicOpen, setMoreMusicOpen] = useState(false)
   const reduced = useReducedMotion()
   return (
     <section className="about-section wrap view-section" aria-labelledby="about-title">
       <div className="about-intro"><p className="eyebrow">About</p><h1 id="about-title">The person behind<br /><span>the interface.</span></h1><p>I’m Xingcheng, but you can call me Vincent. I’m a Queens College computer science grad who loves a good problem, a good story, and a very good pop song.</p><div className="about-facts"><div><span>Based in</span><strong>Sunnyvale, California</strong></div><div><span>Education</span><strong>Queens College · B.A. Computer Science, 2024</strong></div><div><span>Focus</span><strong>Frontend-focused · Full-stack capable</strong></div></div><motion.div className="about-stamp" aria-hidden="true" whileHover={reduced ? undefined : { rotate: 8, scale: 1.06 }}><CapybaraMark /><span>CURIOUS<br />BY NATURE</span></motion.div></div>
       <div className="about-card"><div className="about-card-top"><h2>Outside the code</h2><CapybaraMark /></div>
         <div className="interest-controls" aria-label="Choose an interest"><button type="button" aria-pressed={interest === 'music'} onClick={() => setInterest('music')}>Music ♫</button><button type="button" aria-pressed={interest === 'reading'} onClick={() => setInterest('reading')}>Reading <CapybaraMark /></button></div>
-        <div className="interest-content" aria-live="polite"><AnimatePresence mode="wait" initial={false}><motion.div key={interest} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: .2 }}>
-          {interest === 'music' ? <><h3>Pop is my<br />soundtrack<span>.</span></h3><p>From big vocals to the songs I keep coming back to, there’s always room for more on the playlist.</p><div className="artist-list">{artists.map(artist => <span key={artist}>{artist}</span>)}<span>+ many more</span></div></> : <><h3>A novel kind<br />of escape<span>.</span></h3><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><CapybaraMark /></div></>}
+        <div className="interest-content"><AnimatePresence mode="wait" initial={false}><motion.div key={interest} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: .2 }}>
+          {interest === 'music' ? <><h3>Pop is my<br />soundtrack<span>.</span></h3><p>From big vocals to the songs I keep coming back to, there’s always room for more on the playlist.</p>
+            <div className="artist-list" aria-label="Favorite artists">
+              {artists.map(artist => <button type="button" aria-pressed={selectedArtist === artist} key={artist} onClick={() => { setSelectedArtist(artist); setMoreMusicOpen(false) }}>{artist}<span aria-hidden="true">↗</span></button>)}
+              <button className="artist-more" type="button" aria-expanded={moreMusicOpen} onClick={() => { setMoreMusicOpen(open => !open); setSelectedArtist(null) }}>+ many more<span aria-hidden="true">{moreMusicOpen ? '−' : '+'}</span></button>
+            </div>
+            <AnimatePresence initial={false} mode="wait">
+              {selectedArtist && <motion.div className="now-spinning" key={selectedArtist} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: .2 }}>
+                <span className="now-spinning-disc" aria-hidden="true"><span /></span><span><small>NOW SPINNING</small><strong>{selectedArtist}</strong></span>
+                <a href={spotifySearchUrl(selectedArtist)} target="_blank" rel="noreferrer" aria-label={`Find ${selectedArtist} on Spotify`}>Find on Spotify <span aria-hidden="true">↗</span></a>
+              </motion.div>}
+              {moreMusicOpen && <motion.div className="music-directions" key="more-music" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: .2 }} aria-label="More music directions">
+                <p>More on repeat</p>{musicDirections.map(item => <a href={spotifySearchUrl(item.query)} target="_blank" rel="noreferrer" key={item.label}>{item.label}<span aria-hidden="true">↗</span></a>)}
+              </motion.div>}
+            </AnimatePresence>
+          </> : <><h3>A novel kind<br />of escape<span>.</span></h3><p>When I’m away from the screen, I love getting lost in a good novel and discovering a different kind of world.</p><div className="book-art" aria-hidden="true"><span>GOOD<br />STORIES</span><CapybaraMark /></div></>}
         </motion.div></AnimatePresence></div>
       </div>
     </section>
