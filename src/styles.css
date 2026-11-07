@@ -46,7 +46,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .skip-link:focus { top: 12px; }
 
 /* Navigation */
-.site-header { position: sticky; top: 0; z-index: 40; min-height: 99px; display: flex; justify-content: space-between; gap: 24px; align-items: center; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 8px 24px rgb(41 34 72 / 5%); }
+.site-header { position: sticky; top: 0; z-index: 40; min-height: 99px; display: flex; justify-content: space-between; gap: 24px; align-items: center; border-bottom: 1px solid var(--line); background: var(--paper); }
 .wordmark { font: 700 22px/1 var(--display); letter-spacing: -.08em; white-space: nowrap; }
 .wordmark .capybara-mark { margin-inline: 3px; font-size: .92em; }
 .wordmark:hover .capybara-mark { transform: translateY(-1px) rotate(-5deg); }
