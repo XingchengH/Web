@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'motion/react'
 import { HashRouter, Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { artists, experience, projects } from './content'
-import { ChatDemo, MusicDemo } from './ProjectDemos'
+import { ChatDemo, MarketPulseDemo, MusicDemo } from './ProjectDemos'
 import CapybaraPet from './CapybaraPet'
 import CapybaraMark from './CapybaraMark'
 
@@ -105,6 +105,7 @@ function PageHeading({ id, eyebrow, title, detail }: { id: string; eyebrow: stri
 
 function ProjectArtwork({ type, label, image }: { type: string; label: string; image?: string }) {
   if (image) return <figure className="project-product-shot"><img src={`${import.meta.env.BASE_URL}${image}`} alt={label} /><figcaption>Real product demo · Inline Scheduler</figcaption></figure>
+  if (type === 'market') return <MarketPulseDemo />
   if (type === 'chat') return <ChatDemo />
   if (type === 'music') return <MusicDemo />
   return (
@@ -121,7 +122,7 @@ function Work() {
   const reduced = useReducedMotion()
   return (
     <section className="wrap view-section work-view" aria-labelledby="work-heading">
-      <PageHeading id="work-heading" eyebrow="Selected work" title="Things I’ve built" detail="Three projects showing how I approach real-time systems, product flows, and collaborative builds." />
+      <PageHeading id="work-heading" eyebrow="Selected work" title="Things I’ve built" detail="Four projects spanning live data, real-time systems, product flows, and collaborative builds." />
       <div className="work-layout">
         <div className="project-picker" aria-label="Choose a project">
           <p className="picker-label">Choose a project</p>
@@ -161,7 +162,7 @@ function Experience() {
       <div className="wrap experience-layout">
         <div className="experience-intro"><p className="eyebrow">Professional experience</p><h1 id="experience-title">Complexity,<br /><span>meet clarity.</span></h1><p>Frontend-focused engineering for the workflows people depend on: clear steps, reliable state, and details that hold up in production.</p><a className="button button-primary experience-resume" href={resumeUrl} target="_blank" rel="noreferrer">Open my résumé <span aria-hidden="true">↗</span></a></div>
         <div className="experience-content">
-          <div className="experience-heading"><div><span className="mono">2024 — 2026</span><h2>Apple</h2><p>Full Stack Developer · Cupertino, CA</p></div><CapybaraMark /></div>
+          <div className="experience-heading"><div><span className="mono">2024 — 2026</span><h2>Apple</h2><p>Full Stack Developer · Sunnyvale, CA</p></div><CapybaraMark /></div>
           <p className="experience-summary">Frontend-focused work on an internal identity and access management platform: connecting people, applications, and the access they need.</p>
           <div className="experience-list">{experience.map((item, index) => <motion.article className="experience-item" key={item.title} initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 + index * .08, duration: .35 }}><h3>{item.title}</h3><p>{item.description}</p></motion.article>)}</div>
           <ul className="experience-stack" aria-label="Technologies"><li>React</li><li>TypeScript</li><li>AngularJS</li><li>Zustand</li><li>Java</li><li>Spring Boot</li></ul>

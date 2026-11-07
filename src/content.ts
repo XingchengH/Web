@@ -1,5 +1,19 @@
 export const projects = [
   {
+    category: 'Full-stack · Live market data',
+    title: 'MarketPulse',
+    description: 'Real-time US equities monitoring with authenticated operations and audit-ready workflows.',
+    challenge:
+      'Turn a live market stream into trustworthy operational state without hiding closed markets, stale symbols, provider errors, or missing credentials.',
+    contribution:
+      'Built a production React and Node platform with Alpaca IEX WebSockets, Google OAuth, server-enforced roles, versioned rules, alerts, audit history, MongoDB Atlas, and a unified Render deployment.',
+    tags: ['React', 'Redux Toolkit', 'TypeScript', 'Node.js', 'Socket.IO', 'MongoDB', 'Alpaca IEX'],
+    href: 'https://github.com/XingchengH/MarketPulse',
+    liveHref: 'https://marketpulse-xingchengh.onrender.com/',
+    artwork: 'market',
+    artLabel: 'Animated product demo of the MarketPulse monitoring dashboard',
+  },
+  {
     category: 'Full-stack · Real-time',
     title: 'Real-Time Chat',
     description: 'Real-time conversation across authentication, presence, and history.',

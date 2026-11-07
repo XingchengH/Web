@@ -42,6 +42,56 @@ const chatContacts = [
   { initials: 'NS', name: 'Nia Shah', status: 'Online', online: true },
 ]
 
+const marketSeries = [
+  '3,52 24,49 45,51 66,38 87,41 108,27 129,31 150,17 171,22 192,10',
+  '3,48 24,44 45,47 66,35 87,38 108,31 129,25 150,28 171,14 192,18',
+  '3,50 24,46 45,42 66,45 87,31 108,34 129,20 150,24 171,12 192,8',
+  '3,47 24,50 45,43 66,39 87,43 108,27 129,30 150,16 171,19 192,9',
+]
+
+export function MarketPulseDemo() {
+  const { rootRef, phase, restart } = useDemoLoop(4, 1500)
+  const latency = [92, 78, 84, 71][phase]
+  const rate = [128, 164, 151, 187][phase]
+  const endpointY = [10, 18, 8, 9][phase]
+
+  return (
+    <figure className="project-demo project-demo--market" aria-label="Source-based MarketPulse operations dashboard demo with representative data">
+      <div className="demo-window-bar market-demo-bar">
+        <span className="demo-window-dots" aria-hidden="true"><i /><i /><i /></span>
+        <span>MarketPulse · Live IEX monitor</span>
+        <button type="button" onClick={restart} aria-label="Replay MarketPulse demo">Replay</button>
+      </div>
+      <div className="market-demo-ui" data-ui ref={rootRef}>
+        <section className="market-demo-main">
+          <div className="market-demo-heading"><span><small>OPERATIONS / US EQUITIES</small><strong>Market overview</strong></span><span className="market-live"><i /> STREAM LIVE</span></div>
+          <div className="market-kpis">
+            <article><small>MESSAGE RATE</small><strong>{rate}<span>/s</span></strong><em>Alpaca IEX</em></article>
+            <article><small>INGESTION</small><strong>{latency}<span>ms</span></strong><em>Observed latency</em></article>
+            <article><small>WATCHLIST</small><strong>6<span> symbols</span></strong><em>All connected</em></article>
+          </div>
+          <div className="market-chart">
+            <div><span><strong>Live throughput</strong><small>Last 60 seconds</small></span><b>+18.4%</b></div>
+            <svg viewBox="0 0 195 58" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points={marketSeries[phase]} />
+              <line x1="0" y1="54" x2="195" y2="54" />
+              <circle cx="192" cy={endpointY} r="3" />
+            </svg>
+          </div>
+          <div className="market-symbols"><span><i className="is-good" />AAPL <b>$271.39</b></span><span><i className="is-good" />MSFT <b>$509.65</b></span><span><i className="is-warn" />TSLA <b>$429.48</b></span></div>
+        </section>
+        <aside className="market-demo-aside">
+          <div className="market-demo-aside-heading"><span><small>ACTIVE</small><strong>Alerts</strong></span><b>2</b></div>
+          <article className={`market-alert${phase >= 2 ? ' is-acknowledged' : ''}`}><span className="market-alert-level">HIGH</span><strong>TSLA latency threshold</strong><small>Rule · latency &gt; 90ms</small><em>{phase >= 2 ? 'Acknowledged' : 'Needs review'}</em></article>
+          <article className="market-alert"><span className="market-alert-level is-medium">MED</span><strong>NVDA stream stale</strong><small>No event for 12s</small><em>Investigating</em></article>
+          <div className="market-audit"><small>LATEST AUDIT</small><strong>Rule v4 activated</strong><span>Admin · just now</span></div>
+        </aside>
+      </div>
+      <figcaption>Source-based product demo · Representative operational data</figcaption>
+    </figure>
+  )
+}
+
 export function ChatDemo() {
   const { rootRef, phase, restart } = useDemoLoop(5, 1300)
   const draft = phase === 1 ? 'Meet at Voyager at 3?' : ''
